@@ -98,6 +98,14 @@ for (let i = 0; i < myLibrary.length; i++) {
   }
 
   cardDiv.style.height = "300px";
+  cardDiv.style.padding = "20px";
+  bookTitle.style.padding = "20px";
+  bookAuthor.style.padding = "20px";
+  cardPages.style.padding = "20px";
+  isReadBtn.style.display = "block";
+  isReadBtn.style.padding = "20px";
+  isReadBtn.style.marginBottom = "20px";
+  removeBtn.style.padding = "20px";
 
   mainSection.appendChild(cardDiv);
 }
