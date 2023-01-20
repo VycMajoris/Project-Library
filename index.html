@@ -19,7 +19,7 @@
     <main></main>
 
     <dialog class="addBookDialog">
-      <form action="">
+      <form id="dialogForm" action="">
         <span class="closeDialog">X</span>
         <label for="title"
           >Title
@@ -33,13 +33,25 @@
 
         <label for="pages"
           >Pages
-          <input type="number" id="pages" name="pages" />
+          <input type="number" id="pages" name="pages" min="1" />
         </label>
 
         <div class="divider"></div>
 
-        <button>Read</button>
-        <button>Remove</button>
+        <div class="isReadDiv">
+          <label for="isRead">Have you read it?</label>
+          <input
+            type="checkbox"
+            id="isRead"
+            name="isRead"
+            value="Have you read it?"
+          />
+        </div>
+
+        <!-- <label for="submitBtn">
+          <input type="button" id="submitBtn" name="submit" value="Submit" />
+        </label> -->
+        <button type="submit" id="dialogSubmitBtn">Submit</button>
       </form>
     </dialog>
   </body>
