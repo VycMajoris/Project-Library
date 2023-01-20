@@ -10,14 +10,37 @@
   </head>
   <body>
     <header>
-      <p>Library</p>
+      <p class="libraryPara">Library</p>
       <button class="addBookBtn">
         <p>Add a book</p>
       </button>
       <button class="logInBtn">Log in</button>
     </header>
-    <main>
-      <!-- <div class="buttonContainer"></div> -->
-    </main>
+    <main></main>
+
+    <dialog class="addBookDialog">
+      <form action="">
+        <span class="closeDialog">X</span>
+        <label for="title"
+          >Title
+          <input type="text" id="title" name="title" />
+        </label>
+
+        <label for="author"
+          >Author
+          <input type="text" id="author" name="author" />
+        </label>
+
+        <label for="pages"
+          >Pages
+          <input type="number" id="pages" name="pages" />
+        </label>
+
+        <div class="divider"></div>
+
+        <button>Read</button>
+        <button>Remove</button>
+      </form>
+    </dialog>
   </body>
 </html>

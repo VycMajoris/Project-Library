@@ -21,56 +21,25 @@ function Book(title, author, pages, read) {
 
 // function to add a book to the library
 
-/* function addBookToLibrary() {
-  const title = prompt("What is the title?");
-  const author = prompt("Who is the author?");
-  const pages = parseInt(prompt("How many pages?"), 10);
-  const read = prompt("Have you read it?").toLowerCase() === "yes";
-
-  const book = new Book(title, author, pages, read);
-  myLibrary.push(book);
-} */
-
 /* addBookToLibrary();
 console.log(myLibrary); */
 
-// const addBookBtn = document.getElementsByClassName("addBookBtn");
-
-/* function addBookCard() {
-  // create Div to store book info
-  const cardDiv = document.createElement("div");
-
-  // create info fields.
-  const bookTitle = document.createElement("p");
-  const bookAuthor = document.createElement("p");
-  const cardPages = document.createElement("p");
-  const isReadBtn = document.createElement("button");
-  const removeBtn = document.createElement("button");
-
-  const bookFieldsArr = [
-    bookTitle,
-    bookAuthor,
-    cardPages,
-    isReadBtn,
-    removeBtn,
-  ];
-
-  for (let i = 0; i < 5; i++) {
-    cardDiv.appendChild(bookFieldsArr[i]);
-  }
-
-  bookTitle.innerText = myLibrary.title;
-  bookAuthor.innerText = myLibrary.author;
-  cardPages.innerText= myLibrary.pages;
-  isReadBtn.innerText = 
-}
- */
-
-// addBookBtn.addEventListener("click", addBookCard);
-
 const mainSection = document.querySelector("main");
+const addBookBtn = document.querySelector(".addBookBtn");
+const closeDialog = document.querySelector(".closeDialog");
+const addBookDialog = document.querySelector(".addBookDialog");
 
-for (let i = 0; i < myLibrary.length; i++) {
+addBookBtn.addEventListener("click", () => {
+  addBookDialog.showModal();
+});
+
+closeDialog.addEventListener("click", () => {
+  addBookDialog.close();
+});
+
+// addBookBtn.addEventListener("click", addBookForm);
+
+/* for (let i = 0; i < myLibrary.length; i++) {
   const cardDiv = document.createElement("div");
 
   const bookTitle = document.createElement("p");
@@ -108,4 +77,4 @@ for (let i = 0; i < myLibrary.length; i++) {
   removeBtn.style.padding = "20px";
 
   mainSection.appendChild(cardDiv);
-}
+} */

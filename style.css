@@ -27,6 +27,10 @@ header p {
   margin: 0 auto;
   text-align: center;
   position: relative;
+}
+
+.libraryPara {
+  left: 8%;
   top: -10%;
 }
 
@@ -34,7 +38,9 @@ header button {
   font-size: 30px;
   height: 2em;
   padding: 10px 1em;
-
+  text-align: center;
+  position: relative;
+  top: -7%;
   grid-column: 2;
 }
 
@@ -81,4 +87,44 @@ main {
   width: 100%;
   height: 3em;
   margin-bottom: 20px;
+}
+
+/* Dialog */
+
+/* When dialog is modal (.showmodal()) */
+.addBookDialog:modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20%;
+  height: auto;
+  display: grid;
+  grid-template-rows: 4% repeat(3, 1fr) 1px repeat(2, 1fr);
+  gap: 20px;
+  padding: 20px;
+  min-width: 300px;
+}
+
+label {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+label input {
+  margin-top: 5px;
+  padding: 0.5ch;
+  width: 100%;
+  height: 80%;
+  font-size: 24px;
+}
+
+.addBookDialog span {
+  text-align: center;
+
+  font-size: 20px;
+  font-weight: 900;
+  width: 20px;
+  height: 24px;
+  justify-self: end;
 }
