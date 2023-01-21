@@ -12,11 +12,6 @@ function Book(title, author, pages, read) {
   this.author = author;
   this.pages = pages;
   this.read = read;
-
-  this.info = () =>
-    `${title} by ${author}, ${pages} pages, ${
-      read === true ? "read" : "not read yet"
-    }`;
 }
 
 // function to add a book to the library
@@ -30,12 +25,18 @@ const closeDialog = document.querySelector(".closeDialog");
 const addBookDialog = document.querySelector(".addBookDialog");
 const dialogSubmitBtn = document.querySelector("#dialogSubmitBtn");
 
+const dialogForm = document.getElementById("dialogForm");
+
 const titleInput = document.getElementById("title");
 const authorInput = document.getElementById("author");
 const pageInput = document.getElementById("pages");
 const isReadInput = document.getElementById("isRead");
 
+// EVENT LISTENERS
+
 addBookBtn.addEventListener("click", () => {
+  // Reset the form every time the dialog comes up
+  dialogForm.reset();
   addBookDialog.showModal();
 });
 
@@ -43,25 +44,30 @@ closeDialog.addEventListener("click", () => {
   addBookDialog.close();
 });
 
+dialogSubmitBtn.addEventListener("click", submitFunc);
+
+// SUBMIT FUNCTION
+
 function submitFunc(e) {
   e.preventDefault();
+
   const newBook = new Book();
-  titleInput.value = newBook.title;
-  authorInput.value = newBook.author;
-  pageInput.value = newBook.pages;
-  isReadInput.value = newBook.read;
+  newBook.title = titleInput.value;
+  newBook.author = authorInput.value;
+  newBook.pages = pageInput.value;
+  console.log(isReadInput.checked);
+  newBook.read = isReadInput.checked ? "I've read" : "Not read yet";
 
   myLibrary.push(newBook);
+
   addBookDialog.close();
   addBookCards();
 }
 
-dialogSubmitBtn.addEventListener("click", submitFunc);
-
 // addBookBtn.addEventListener("click", addBookForm);
 
 function addBookCards() {
-  for (let i = 0; i < myLibrary.length; i++) {
+  for (let i = myLibrary.length - 1; i < myLibrary.length; i++) {
     const cardDiv = document.createElement("div");
 
     const bookTitle = document.createElement("p");
@@ -70,11 +76,12 @@ function addBookCards() {
     const isReadBtn = document.createElement("button");
     const removeBtn = document.createElement("button");
 
-    bookTitle.innerText = myLibrary[i].title;
+    bookTitle.innerText = `"${myLibrary[i].title}"`;
+
     bookAuthor.innerText = myLibrary[i].author;
     cardPages.innerText = myLibrary[i].pages;
     isReadBtn.innerText = myLibrary[i].read;
-    removeBtn.innerText = "remove";
+    removeBtn.innerText = "Remove";
 
     const bookFieldsArr = [
       bookTitle,
@@ -88,15 +95,23 @@ function addBookCards() {
       cardDiv.appendChild(bookFieldsArr[j]);
     }
 
-    cardDiv.style.height = "300px";
-    cardDiv.style.padding = "20px";
-    bookTitle.style.padding = "20px";
-    bookAuthor.style.padding = "20px";
-    cardPages.style.padding = "20px";
-    isReadBtn.style.display = "block";
-    isReadBtn.style.padding = "20px";
-    isReadBtn.style.marginBottom = "20px";
-    removeBtn.style.padding = "20px";
+    cardDiv.style.cssText = `font-size: 24px; display: flex; flex-direction: column; justify-content: stretch; text-align: center; 
+                            min-height: fit-content; border: solid 2px; border-radius: 10px; padding: 20px; gap: 10px`;
+
+    bookTitle.style.marginLeft = "auto";
+    bookTitle.style.marginRight = "auto";
+    bookAuthor.style.marginLeft = "auto";
+    bookAuthor.style.marginRight = "auto";
+    cardPages.style.marginLeft = "auto";
+    cardPages.style.marginRight = "auto";
+
+    bookTitle.style.flex = "1";
+    bookAuthor.style.flex = "1";
+    cardPages.style.flex = "1";
+
+    isReadBtn.style.height = "15%";
+
+    removeBtn.style.height = "15%";
 
     mainSection.appendChild(cardDiv);
   }
