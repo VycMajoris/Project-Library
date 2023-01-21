@@ -7,17 +7,14 @@ const myLibrary = [
 ];
 
 // Constructor
-function Book(title, author, pages, read) {
+function Book(title, author, pages, read, order) {
   this.title = title;
   this.author = author;
   this.pages = pages;
   this.read = read;
+  // the index of an object. This is used to remove an object when remove button is pressed
+  this.order = order;
 }
-
-// function to add a book to the library
-
-/* addBookToLibrary();
-console.log(myLibrary); */
 
 const mainSection = document.querySelector("main");
 const addBookBtn = document.querySelector(".addBookBtn");
@@ -32,7 +29,7 @@ const authorInput = document.getElementById("author");
 const pageInput = document.getElementById("pages");
 const isReadInput = document.getElementById("isRead");
 
-// EVENT LISTENERS
+// ***** EVENT LISTENERS *****
 
 addBookBtn.addEventListener("click", () => {
   // Reset the form every time the dialog comes up
@@ -44,9 +41,10 @@ closeDialog.addEventListener("click", () => {
   addBookDialog.close();
 });
 
+// eslint-disable-next-line no-use-before-define
 dialogSubmitBtn.addEventListener("click", submitFunc);
 
-// SUBMIT FUNCTION
+// ***** SUBMIT FUNCTION *****
 
 function submitFunc(e) {
   e.preventDefault();
@@ -55,18 +53,19 @@ function submitFunc(e) {
   newBook.title = titleInput.value;
   newBook.author = authorInput.value;
   newBook.pages = pageInput.value;
-  console.log(isReadInput.checked);
   newBook.read = isReadInput.checked ? "I've read" : "Not read yet";
+  newBook.order = myLibrary.length;
 
   myLibrary.push(newBook);
 
   addBookDialog.close();
-  addBookCards();
+  // eslint-disable-next-line no-use-before-define
+  addBookCards(newBook);
 }
 
 // addBookBtn.addEventListener("click", addBookForm);
 
-function addBookCards() {
+function addBookCards(newBook) {
   for (let i = myLibrary.length - 1; i < myLibrary.length; i++) {
     const cardDiv = document.createElement("div");
 
@@ -110,9 +109,18 @@ function addBookCards() {
     cardPages.style.flex = "1";
 
     isReadBtn.style.height = "15%";
+    isReadBtn.style.fontSize = "inherit";
 
     removeBtn.style.height = "15%";
+    removeBtn.style.fontSize = "inherit";
 
     mainSection.appendChild(cardDiv);
+
+    // To remove a book from myLibrary array
+    removeBtn.addEventListener("click", () => {
+      myLibrary.splice(newBook.order, 1);
+
+      mainSection.removeChild(cardDiv);
+    });
   }
 }
