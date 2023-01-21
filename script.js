@@ -1,10 +1,6 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable no-alert */
-const myLibrary = [
-  /*   { title: "Hobbit", author: "Tolkien", pages: 142, read: true },
-  { title: "Sherlock", author: "DontKnow", pages: 432, read: false },
-  { title: "Cosmos", author: "Carl Sagan", pages: 348, read: false }, */
-];
+const myLibrary = [];
 
 // Constructor
 function Book(title, author, pages, read, order) {
@@ -61,6 +57,8 @@ function submitFunc(e) {
   addBookDialog.close();
   // eslint-disable-next-line no-use-before-define
   addBookCards(newBook);
+  console.log(newBook.__proto__);
+  return newBook;
 }
 
 // addBookBtn.addEventListener("click", addBookForm);
@@ -114,6 +112,18 @@ function addBookCards(newBook) {
     removeBtn.style.height = "15%";
     removeBtn.style.fontSize = "inherit";
 
+    isReadBtn.addEventListener("click", () => {
+      if (newBook.read === "Not read yet") {
+        newBook.read = "I've read";
+      } else if (newBook.read === "I've read") {
+        newBook.read = "Not read yet";
+      }
+      isReadBtn.innerText = newBook.read;
+      console.log(myLibrary);
+    });
+
+    isReadBtn.addEventListener("click", changeReadStatus);
+
     mainSection.appendChild(cardDiv);
 
     // To remove a book from myLibrary array
@@ -123,4 +133,19 @@ function addBookCards(newBook) {
       mainSection.removeChild(cardDiv);
     });
   }
+  console.log(addBookCards.prototype);
+}
+
+Object.setPrototypeOf(changeReadStatus.prototype, addBookCards.prototype);
+
+// Change read status of the book
+function changeReadStatus() {
+  /* console.log(changeReadStatus.__proto__.__proto__); */
+  /* if (changeReadStatus.prototype.read === "Not read yet") {
+    changeReadStatus.prototype.read = "I've read";
+  } else if (changeReadStatus.prototype.read === "I've read") {
+    changeReadStatus.prototype.read = "Not read yet";
+  }
+  changeReadStatus.prototype.isReadBtn.innerText =
+    changeReadStatus.prototype.read; */
 }
