@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Library</title>
     <link rel="stylesheet" href="style.css" />
-    <script defer src="script.js"></script>
+    <script defer src="script.js" type="module"></script>
   </head>
   <body>
     <header>
@@ -18,30 +18,47 @@
     </header>
     <main></main>
 
-    <!--     <div class="cardDiv">
-      <p class="titleOfBook"></p>
-      <p class="authorOfBook"></p>
-      <p class="pagesOfBook"></p>
-      <button class="isReadButton"></button>
-      <button class="removeButton">Remove</button>
-    </div> -->
-
     <dialog class="addBookDialog">
       <form id="dialogForm" action="">
         <span class="closeDialog">X</span>
         <label for="title"
           >Title
-          <input type="text" id="title" name="title" maxlength="70" />
+          <input
+            type="text"
+            id="title"
+            name="title"
+            maxlength="50"
+            minlength="3"
+            required
+            placeholder="Required, 3 to 50 characters"
+          />
+          <span class="error" aria-live="polite"></span>
         </label>
 
         <label for="author"
           >Author
-          <input type="text" id="author" name="author" maxlength="50" />
+          <input
+            type="text"
+            id="author"
+            name="author"
+            maxlength="40"
+            minlength="3"
+            required
+            placeholder="Required, 3 to 40 characters"
+          />
         </label>
 
         <label for="pages"
           >Pages
-          <input type="number" id="pages" name="pages" min="1" />
+          <input
+            type="number"
+            id="pages"
+            name="pages"
+            min="1"
+            max="10000"
+            required
+            placeholder="Required, maximum 10.000 pages"
+          />
         </label>
 
         <div class="divider"></div>
@@ -51,9 +68,6 @@
           <input type="checkbox" id="isRead" name="isRead" />
         </div>
 
-        <!-- <label for="submitBtn">
-          <input type="button" id="submitBtn" name="submit" value="Submit" />
-        </label> -->
         <button type="submit" id="dialogSubmitBtn">Submit</button>
       </form>
     </dialog>

@@ -17,6 +17,7 @@ const addBookBtn = document.querySelector(".addBookBtn");
 const closeDialog = document.querySelector(".closeDialog");
 const addBookDialog = document.querySelector(".addBookDialog");
 const dialogSubmitBtn = document.querySelector("#dialogSubmitBtn");
+const errorSpan = document.querySelector(".error");
 
 const dialogForm = document.getElementById("dialogForm");
 
@@ -38,12 +39,12 @@ closeDialog.addEventListener("click", () => {
 });
 
 // eslint-disable-next-line no-use-before-define
-dialogSubmitBtn.addEventListener("click", submitFunc);
+/* dialogSubmitBtn.addEventListener("click", submitFunc); */
 
 // ***** SUBMIT FUNCTION *****
 
-function submitFunc(e) {
-  e.preventDefault();
+function submitFunc() {
+  /*   e.preventDefault(); */
 
   const newBook = new Book();
   newBook.title = titleInput.value;
@@ -57,7 +58,7 @@ function submitFunc(e) {
   addBookDialog.close();
   // eslint-disable-next-line no-use-before-define
   addBookCards(newBook);
-  console.log(newBook.__proto__);
+  console.log(myLibrary);
   return newBook;
 }
 
@@ -135,6 +136,53 @@ function addBookCards(newBook) {
   }
   console.log(addBookCards.prototype);
 }
+
+// Validation
+
+titleInput.addEventListener("input", () => {
+  if (titleInput.validity.valueMissing) {
+    titleInput.setCustomValidity("Please enter a title.");
+  } else if (titleInput.validity.tooLong) {
+    titleInput.setCustomValidity("Title must be between 3 and 50 characters.");
+  } else if (titleInput.validity.tooShort) {
+    titleInput.setCustomValidity("At least 3 characters.");
+  } else {
+    titleInput.setCustomValidity("");
+  }
+});
+
+authorInput.addEventListener("input", () => {
+  if (authorInput.validity.valueMissing) {
+    authorInput.setCustomValidity("Please enter an author.");
+  } else if (authorInput.validity.tooLong) {
+    authorInput.setCustomValidity(
+      "Author name must be between 3 and 40 characters."
+    );
+  } else if (authorInput.validity.tooShort) {
+    authorInput.setCustomValidity("At least 3 characters.");
+  } else {
+    authorInput.setCustomValidity("");
+  }
+});
+
+pageInput.addEventListener("input", () => {
+  if (pageInput.validity.valueMissing) {
+    pageInput.setCustomValidity("Please enter the number of pages.");
+  } else if (pageInput.validity.rangeUnderflow) {
+    pageInput.setCustomValidity("At least 1 page.");
+  } else if (pageInput.validity.rangeOverflow) {
+    pageInput.setCustomValidity("No more than 10000 pages.");
+  } else {
+    pageInput.setCustomValidity("");
+  }
+});
+// Form submit
+
+dialogForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  submitFunc();
+});
 
 Object.setPrototypeOf(changeReadStatus.prototype, addBookCards.prototype);
 
